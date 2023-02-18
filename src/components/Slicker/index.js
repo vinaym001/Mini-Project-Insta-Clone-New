@@ -11,7 +11,7 @@ const settings = {
   slidesToScroll: 1,
   responsive: [
     {
-      breakpoint: 1024,
+      breakpoint: 600,
       settings: {
         slidesToShow: 4,
         slidesToScroll: 1,
@@ -33,27 +33,20 @@ const settings = {
     },
   ],
 }
-const apiStatusConstants = {
-  initial: 'INITIAL',
-  progress: 'IN_PROGRESS',
-  success: 'SUCCESS',
-  fail: 'FAILURE',
-}
 
 class Slicker extends Component {
   renderSlider = () => {
-    const {storyDataList} = this.props
+    const {homeStoryDetails} = this.props
     return (
       <Slider {...settings}>
-        {storyDataList.map(eachLogo => {
-          const {userId, userName, storyUrl} = eachLogo
-          return (
-            <div className="slick-item" key={userId}>
-              <img className="logo-image" src={storyUrl} alt="user story" />
-              <p className="stories-name">{userName}</p>
-            </div>
-          )
-        })}
+        <li className="slick-item" key={homeStoryDetails.userId}>
+          <img
+            className="logo-image"
+            src={homeStoryDetails.storyUrl}
+            alt="user story"
+          />
+          <p className="stories-name">{homeStoryDetails.userName}</p>
+        </li>
       </Slider>
     )
   }
@@ -64,27 +57,11 @@ class Slicker extends Component {
     </div>
   )
 
-  //   renderViewOnApiStatus = () => {
-  //     const {apiStatus} = this.state
-  //     switch (apiStatus) {
-  //       case apiStatusConstants.progress:
-  //         return this.renderLoaderView()
-  //       case apiStatusConstants.success:
-  //         return this.renderSlider()
-  //       default:
-  //         return null
-  //     }
-  //   }
-
   render() {
-    const {storyDataList} = this.props
+    const {homeStoryDetails} = this.props
     return (
       <div className="main-container">
-        <div className="slick-container">
-          {storyDataList.length > 0
-            ? this.renderSlider()
-            : this.renderLoaderView()}
-        </div>
+        <div className="slick-container">{this.renderSlider()}</div>
       </div>
     )
   }

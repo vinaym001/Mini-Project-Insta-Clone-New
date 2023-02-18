@@ -1,0 +1,45 @@
+.cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fafafa;
+  align-items: center;
+}
+
+.page-not-found {
+  width: 300px;
+}
+
+.nf-h {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+
+  color: #262626;
+}
+
+.nf-p {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+
+  color: #989898;
+}
+
+.not-found-home {
+  padding: 12px 32px;
+  gap: 8px;
+  width: 141px;
+  height: 48px;
+  background: #4094ef;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight:bold;
+}

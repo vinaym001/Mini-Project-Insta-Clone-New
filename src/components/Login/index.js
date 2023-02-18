@@ -58,6 +58,7 @@ class Login extends Component {
             className="login-logo-img"
           />
           <form className="login-form" onSubmit={this.onLogin}>
+            <h1 className="login-hed">Insta Share</h1>
             <label htmlFor="login-name" className="login-label">
               USERNAME
             </label>

@@ -1,4 +1,5 @@
 import './index.css'
+import {BsGrid3X2} from 'react-icons/bs'
 
 const UserProfileDetails = props => {
   const {userProfileData} = props
@@ -32,7 +33,34 @@ const UserProfileDetails = props => {
           <p className="user-bio">{userBio}</p>
         </div>
       </div>
-      <hr />
+
+      <ul className="user-story-container ">
+        {stories?.map(eachItem => (
+          <li key={eachItem.id}>
+            <img
+              src={eachItem.image}
+              alt="user story"
+              className="user-story-img"
+            />
+          </li>
+        ))}
+      </ul>
+      <hr className="line" />
+      <div className="post-grid">
+        <BsGrid3X2 size={25} />
+        <p className="post-txt">Posts</p>
+      </div>
+      <ul className="user-post-container">
+        {posts?.map(eachItem => (
+          <li key={eachItem.id}>
+            <img
+              src={eachItem.image}
+              alt="user post"
+              className="user-post-img"
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

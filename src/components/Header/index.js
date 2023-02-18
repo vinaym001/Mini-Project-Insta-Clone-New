@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 import {FaSearch} from 'react-icons/fa'
-import SearchContext from '../../context/SearchContext'
 import './index.css'
 
 class Header extends Component {
@@ -48,53 +47,45 @@ class Header extends Component {
     const {searchInput, searchResultList} = this.state
 
     return (
-      <SearchContext.Provider
-        value={{
-          searchInput,
-          onSearch: this.onSearch,
-          searchResultList,
-          onSearchClick: this.onSearchClick,
-        }}
-      >
-        <div>
-          <nav className="nav-container">
-            <Link to="/">
-              <img
-                src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676516080/insta_icon_login_cvg0vu.svg"
-                alt="website logo"
-                className="header-website-logo"
+      <div>
+        <nav className="nav-container">
+          <Link to="/">
+            <img
+              src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676516080/insta_icon_login_cvg0vu.svg"
+              alt="website logo"
+              className="header-website-logo"
+            />
+          </Link>
+          <h1 className="logo-name">Insta Share</h1>
+          <div className="nav-right-container">
+            <div className="search-input-container">
+              <input
+                type="search"
+                placeholder="Search Caption"
+                className="header-search-input"
+                onChange={this.onSearch}
               />
-            </Link>
-            <h1 className="logo-name">Insta Share</h1>
-            <div className="nav-right-container">
-              <div className="search-input-container">
-                <input
-                  type="search"
-                  placeholder="Search Caption"
-                  className="header-search-input"
-                  onChange={this.onSearch}
-                />
-                <button
-                  type="button"
-                  className="search-btn"
-                  onClick={this.onSearchClick}
-                >
-                  <FaSearch className="search-icon" />
-                </button>
-              </div>
-              <Link className="home-link" to="/">
-                <p>Home</p>
-              </Link>
-              <Link className="profile-link" to="/profile">
-                <p>Profile</p>
-              </Link>
-              <button type="button" className="logout-button">
-                Logout
+              <button
+                type="button"
+                className="search-btn"
+                onClick={this.onSearchClick}
+                //   testid="searchIcon"
+              >
+                <FaSearch className="search-icon" />
               </button>
             </div>
-          </nav>
-        </div>
-      </SearchContext.Provider>
+            <Link className="home-link" to="/">
+              <p>Home</p>
+            </Link>
+            <Link className="profile-link" to="/profile">
+              <p>Profile</p>
+            </Link>
+            <button type="button" className="logout-button">
+              Logout
+            </button>
+          </div>
+        </nav>
+      </div>
     )
   }
 }

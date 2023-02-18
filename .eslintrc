@@ -18,12 +18,14 @@
       "files": ["styledComponents.js"],
       "rules": {
         "import/prefer-default-export": "off"
+        "react/no-unknown-property": ["error", { ignore: ["jsx"] }],
       }
     }
   ],
   "rules": {
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
+    "react/no-unknown-property": ["error", { ignore: ["jsx"] }],
     "react/state-in-constructor": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-uses-react": "off",

@@ -13,6 +13,7 @@ const Posts = props => {
   }
 
   const {
+    postId,
     comments,
     createdAt,
     likesCount,
@@ -22,17 +23,20 @@ const Posts = props => {
     userName,
   } = postDetailsItems
   return (
-    <li className="post-li-container" key={userId}>
-      <Link to={`/users/${userId}`}>
-        <div className="post-upper-container">
+    <li className="post-li-container">
+      <div className="post-upper-container">
+        <Link to={`/users/${userId}`}>
           <img
             src={profilePic}
             alt="post author profile"
             className="post-user-profile-img"
           />
+        </Link>
+        <Link to={`/users/${userId}`}>
           <p className="post-username">{userName}</p>
-        </div>
-      </Link>
+        </Link>
+      </div>
+
       <div className="post-img">
         <img
           src={postDetails.image_url}
@@ -44,11 +48,21 @@ const Posts = props => {
       <div className="post-lower-container">
         <div className="social-button-container">
           {isLiked ? (
-            <button type="button" className="social-buttons" onClick={onLiked}>
+            <button
+              type="button"
+              className="social-buttons"
+              onClick={onLiked}
+              data-testid="unLikeIcon"
+            >
               <FcLike size={25} />
             </button>
           ) : (
-            <button type="button" className="social-buttons" onClick={onLiked}>
+            <button
+              type="button"
+              className="social-buttons"
+              onClick={onLiked}
+              data-testid="likeIcon"
+            >
               <BsHeart size={25} />
             </button>
           )}
@@ -66,7 +80,7 @@ const Posts = props => {
         )}
         <ul className="comment-container">
           {comments.map(eachItem => (
-            <li className="post-comments">
+            <li className="post-comments" key={eachItem.user_id}>
               <span className="span-element">{eachItem.user_name} </span>
               {eachItem.comment}
             </li>
