@@ -14,8 +14,8 @@ const NotFound = props => {
       />
       <h1 className="nf-h">Page Not Found</h1>
       <p className="nf-p">
-        we are sorry, the page you requested could not be found. <br /> Please go back
-        to the homepage.
+        we are sorry, the page you requested could not be found. <br /> Please
+        go back to the homepage.
       </p>
       <button type="button" className="not-found-home" onClick={onHome}>
         Home Page
