@@ -16,6 +16,12 @@ class Header extends Component {
     this.getSearchResultData()
   }
 
+  onLogout = () => {
+    const {history} = this.props
+    history.replace('/login')
+    Cookies.remove('jwt_token')
+  }
+
   getSearchResultData = async () => {
     const {searchInput} = this.state
     const jwtToken = Cookies.get('jwt_token')
@@ -80,7 +86,11 @@ class Header extends Component {
             <Link className="profile-link" to="/profile">
               <p>Profile</p>
             </Link>
-            <button type="button" className="logout-button">
+            <button
+              type="button"
+              className="logout-button"
+              onClick={this.onLogout}
+            >
               Logout
             </button>
           </div>

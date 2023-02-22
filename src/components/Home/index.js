@@ -31,6 +31,12 @@ class Home extends Component {
     this.getPostData()
   }
 
+  onLogout = () => {
+    const {history} = this.props
+    history.replace('/login')
+    Cookies.remove('jwt_token')
+  }
+
   onSearch = event => {
     this.setState({searchInput: event.target.value})
   }
@@ -108,7 +114,11 @@ class Home extends Component {
             <Link className="profile-link" to="/profile">
               <p>Profile</p>
             </Link>
-            <button type="button" className="logout-button">
+            <button
+              type="button"
+              className="logout-button"
+              onClick={this.onLogout}
+            >
               Logout
             </button>
           </div>
