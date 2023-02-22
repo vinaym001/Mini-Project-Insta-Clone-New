@@ -52,13 +52,16 @@ class Login extends Component {
           className="login-img"
         />
         <div className="login-container">
-          <img
-            src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676516080/insta_icon_login_cvg0vu.svg"
-            alt="website logo"
-            className="login-logo-img"
-          />
-          <form className="login-form" onSubmit={this.onLogin}>
+          <div>
+            <img
+              src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676516080/insta_icon_login_cvg0vu.svg"
+              alt="website logo"
+              className="login-logo-img"
+            />
             <h1 className="login-hed">Insta Share</h1>
+          </div>
+
+          <form className="login-form" onSubmit={this.onLogin}>
             <label htmlFor="login-name" className="login-label">
               USERNAME
             </label>
@@ -70,6 +73,7 @@ class Login extends Component {
               onChange={this.onNameInput}
               value={username}
             />
+            <h1 className="login-hed">Insta Share</h1>
             <label htmlFor="login-password" className="login-label">
               PASSWORD
             </label>

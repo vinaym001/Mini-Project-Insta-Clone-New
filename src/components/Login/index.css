@@ -39,6 +39,8 @@
   width: 80px;
   margin-left: 180px;
 }
+.login-hed {
+}
 
 .login-label {
   font-family: 'Roboto';
@@ -89,21 +91,21 @@
   color: #ffffff;
 }
 
-.err-msg{
-    color:red;
-    font-size:14px;
-    font-family:'roboto';
+.err-msg {
+  color: red;
+  font-size: 14px;
+  font-family: 'roboto';
 }
-.login-hed{
-    position: absolute;
-left: 68.82%;
-right: 22.71%;
-top: 38.77%;
-bottom: 58.11%;
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-font-size: 24px;
-line-height: 32px;
-color: #262626;
+.login-hed {
+  position: absolute;
+  left: 68.82%;
+  right: 22.71%;
+  top: 38.77%;
+  bottom: 58.11%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #262626;
 }

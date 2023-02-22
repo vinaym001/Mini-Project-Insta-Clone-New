@@ -177,10 +177,23 @@ class Home extends Component {
     }
   }
 
-  onLikeClicked = () => {
-    this.setState(prevState => ({
-      isLiked: !prevState.isLiked,
-    }))
+  onLikeClicked = async postId => {
+    const {isLiked} = this.state
+    const jwtToken = Cookies.get('jwt_token')
+    const apiUrl = `https://apis.ccbp.in/insta-share/posts/${postId}/like`
+    const reqObj = {like_status: !isLiked}
+
+    const options = {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      body: JSON.stringify(reqObj),
+    }
+    const response = await fetch(apiUrl, options)
+    if (response.ok) {
+      this.setState({isLiked: !isLiked})
+    }
   }
 
   renderLoaderView = () => (
