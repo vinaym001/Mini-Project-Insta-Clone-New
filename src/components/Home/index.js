@@ -22,7 +22,6 @@ class Home extends Component {
   state = {
     storyDataList: [],
     postsList: [],
-    isLiked: false,
     apiStatus: apiStatusConstants.initial,
     searchInput: '',
   }
@@ -203,16 +202,11 @@ class Home extends Component {
   )
 
   renderPosts = () => {
-    const {postsList, isLiked} = this.state
+    const {postsList} = this.state
     return (
       <ul>
         {postsList.map(eachItem => (
-          <Posts
-            key={eachItem.postId}
-            postDetailsItems={eachItem}
-            onLikeClicked={this.onLikeClicked}
-            isLiked={isLiked}
-          />
+          <Posts key={eachItem.postId} postDetailsItems={eachItem} />
         ))}
       </ul>
     )

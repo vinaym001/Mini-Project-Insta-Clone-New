@@ -79,10 +79,10 @@
 }
 .user-name {
   position: absolute;
-  left: 32.83%;
-  right: 50.32%;
-  top: 32.3;
-  bottom: 62.24%;
+  left: 28.96%;
+  right: 52.32%;
+  top: 29.3;
+  bottom: 66.24%;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
@@ -108,8 +108,8 @@
   position: absolute;
   left: 17.83%;
   right: 66.32%;
-  top: 50.58%;
-  bottom: 50.24%;
+  top: 45.58%;
+  bottom: 55.24%;
   display: flex;
   list-style-type: none;
 }
