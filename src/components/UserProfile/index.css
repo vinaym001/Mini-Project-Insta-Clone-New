@@ -1,8 +1,3 @@
-.user-profile-bg-container {
-  position: absolute;
-  width: 1440px;
-  height: 2085px;
-  left: 0px;
-  top: 0px;
-  background: #fafafa;
+.loader-container {
+  margin-left: 300px;
 }

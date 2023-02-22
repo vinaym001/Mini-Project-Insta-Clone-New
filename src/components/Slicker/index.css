@@ -1,30 +1,152 @@
 .main-container {
-  width: 1040px;
+  display: flex;
   justify-content: center;
-  padding: 15px;
-  margin-top: 80px;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 90px;
+  width: 60vw;
 }
 
-.slick-item {
+.slick-container {
+  width: 80%;
+  max-width: 1100px;
+}
+
+.story-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 5px;
-  list-style-type: none;
-}
-.logo-image {
-  border: 1px solid transparent;
-  border-radius: 100%;
-  width: 60px;
+  margin-top: 15px;
 }
 
-.stories-name {
-  color: #262626;
+.story-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin-bottom: 5px;
+  padding: 3px;
+  border: solid 2px red;
+}
+
+.story-user-name {
   font-family: 'Roboto';
-  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  color: #262626;
+  margin: 0px;
+  text-align: center;
+}
+
+.marquee {
+  width: 50px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.marquee span {
+  display: inline-block;
+  width: max-content;
+  will-change: transform;
+  animation: marquee 5s linear infinite;
+  animation-play-state: paused;
+}
+
+.marquee span:hover {
+  animation-play-state: running;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-70%, 0);
+  }
+}
+
+.story-footer-rule {
+  border-top: none;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: gray;
+}
+
+.stories-loading-container {
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stories-error-icon {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 15px;
+}
+.stories-error-message {
+  font-family: 'Roboto';
   font-weight: 400;
   font-size: 12px;
+  color: #262626;
+  margin: 0px;
+  margin-bottom: 15px;
+}
+.stories-error-button {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 10px;
+  color: #ffffff;
+  margin: 0px;
   width: 60px;
-  text-align: center;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4094ef;
+  border-radius: 6px;
+  border: 0px;
+}
+
+@media screen and (min-width: 768px) {
+  .main-container {
+    margin-bottom: 35px;
+  }
+  .slick-container {
+    width: 78%;
+  }
+  .story-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+  }
+  .story-user-name {
+    font-size: 14px;
+  }
+  .marquee {
+    width: 60px;
+  }
+  .story-footer-rule {
+    display: none;
+  }
+  .stories-loading-container {
+    min-height: 139px;
+    margin-top: 50px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .slick-container {
+    width: 65%;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 25px;
+  }
 }

@@ -1,17 +1,26 @@
 import {Component} from 'react'
-
+import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 import Header from '../Header'
 import UserProfileDetails from '../UserProfileDetails'
+import './index.css'
+
+const apiStatusConstants = {
+  initial: 'INITIAL',
+  progress: 'IN_PROGRESS',
+  success: 'SUCCESS',
+  fail: 'FAILURE',
+}
 
 class UserProfile extends Component {
-  state = {userProfileData: {}}
+  state = {userProfileData: {}, apiStatus: apiStatusConstants.initial}
 
   componentDidMount() {
     this.getUserProfile()
   }
 
   getUserProfile = async () => {
+    this.setState({apiStatus: apiStatusConstants.progress})
     const {match} = this.props
     const {params} = match
     const {userId} = params
@@ -39,7 +48,12 @@ class UserProfile extends Component {
         postsCount: userDetails.posts_count,
         stories: userDetails.stories,
       }
-      this.setState({userProfileData: UserData})
+      this.setState({
+        userProfileData: UserData,
+        apiStatus: apiStatusConstants.success,
+      })
+    } else {
+      this.setState({apiStatus: apiStatusConstants.fail})
     }
   }
 
@@ -52,11 +66,45 @@ class UserProfile extends Component {
     )
   }
 
+  renderLoaderView = () => (
+    <div className="loader-container" data-testid="loader">
+      <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
+    </div>
+  )
+
+  renderFailView = () => (
+    <>
+      <img
+        src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676539801/alert-triangle_hkmcpf.png"
+        alt="page not found"
+        className="page not found"
+      />
+      <p className="home-fail-text">Something went wrong. Please try again</p>
+      <button type="button" className="retry-btn" onClick={this.getUserProfile}>
+        Try again
+      </button>
+    </>
+  )
+
+  renderViewOnApiStatus = () => {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case apiStatusConstants.progress:
+        return this.renderLoaderView()
+      case apiStatusConstants.success:
+        return this.renderUserProfileData()
+      case apiStatusConstants.fail:
+        return this.renderFailView()
+      default:
+        return null
+    }
+  }
+
   render() {
     return (
       <div className="user-profile-bg-container">
         <Header />
-        {this.renderUserProfileData()}
+        {this.renderViewOnApiStatus()}
       </div>
     )
   }

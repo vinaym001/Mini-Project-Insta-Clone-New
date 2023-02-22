@@ -58,7 +58,6 @@ class Login extends Component {
               alt="website logo"
               className="login-logo-img"
             />
-            <h1 className="login-hed">Insta Share</h1>
           </div>
 
           <form className="login-form" onSubmit={this.onLogin}>
@@ -73,7 +72,6 @@ class Login extends Component {
               onChange={this.onNameInput}
               value={username}
             />
-            <h1 className="login-hed">Insta Share</h1>
             <label htmlFor="login-password" className="login-label">
               PASSWORD
             </label>

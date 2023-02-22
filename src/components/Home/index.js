@@ -20,14 +20,12 @@ const apiStatusConstants = {
 
 class Home extends Component {
   state = {
-    storyDataList: [],
     postsList: [],
     apiStatus: apiStatusConstants.initial,
     searchInput: '',
   }
 
   componentDidMount() {
-    this.getUserStoryData()
     this.getPostData()
   }
 
@@ -160,32 +158,6 @@ class Home extends Component {
     }
   }
 
-  getUserStoryData = async () => {
-    this.setState({apiStatus: apiStatusConstants.progress})
-    const jwtToken = Cookies.get('jwt_token')
-    const apiUrl = 'https://apis.ccbp.in/insta-share/stories'
-    const options = {
-      method: 'GET',
-      headers: {
-        //* headers should be separate object in options
-        Authorization: `Bearer ${jwtToken}`,
-      },
-    }
-    const response = await fetch(apiUrl, options)
-    if (response.ok) {
-      const data = await response.json()
-      const storyData = data.users_stories.map(eachItem => ({
-        storyUrl: eachItem.story_url,
-        userId: eachItem.user_id,
-        userName: eachItem.user_name,
-      }))
-      this.setState({
-        storyDataList: storyData,
-        apiStatus: apiStatusConstants.success,
-      })
-    }
-  }
-
   onLikeClicked = async postId => {
     const {isLiked} = this.state
     const jwtToken = Cookies.get('jwt_token')
@@ -222,24 +194,19 @@ class Home extends Component {
     )
   }
 
-  renderFailView = () => {
-    const onRetry = () => {
-      this.setState({apiStatus: apiStatusConstants.progress}, this.getPostData)
-    }
-    return (
-      <>
-        <img
-          src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676539801/alert-triangle_hkmcpf.png"
-          alt="page not found"
-          className="page not found"
-        />
-        <p className="home-fail-text">Something went wrong. Please try again</p>
-        <button type="button" className="retry-btn" onClick={onRetry}>
-          Try again
-        </button>
-      </>
-    )
-  }
+  renderFailView = () => (
+    <>
+      <img
+        src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676539801/alert-triangle_hkmcpf.png"
+        alt="page not found"
+        className="page not found"
+      />
+      <p className="home-fail-text">Something went wrong. Please try again</p>
+      <button type="button" className="retry-btn" onClick={this.getPostData}>
+        Try again
+      </button>
+    </>
+  )
 
   renderNoSearchFoundView = () => {
     const onRetry = () => {
@@ -281,11 +248,7 @@ class Home extends Component {
     return (
       <div className="home-bg-container">
         {this.renderHeader()}
-        <ul className="home-story-ul-container">
-          {storyDataList.map(eachItem => (
-            <Slicker homeStoryDetails={eachItem} key={eachItem.userId} />
-          ))}
-        </ul>
+        <Slicker />
         {this.renderViewOnApiStatus()}
       </div>
     )
