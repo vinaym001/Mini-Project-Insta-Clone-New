@@ -1,5 +1,6 @@
 import './index.css'
-import {BsGrid3X2} from 'react-icons/bs'
+import {BsGrid3X3} from 'react-icons/bs'
+import {BiCamera} from 'react-icons/bi'
 
 const MyProfile = props => {
   const {myProfileDetails} = props
@@ -17,19 +18,25 @@ const MyProfile = props => {
   } = myProfileDetails
 
   return (
-    <div>
+    <div className="user-profile-bg">
       <div className="bio-container">
         <div className="profile-img-container">
           <img src={profilePic} alt="my profile" className="profile-img" />
         </div>
         <div className="profile-info">
-          <p className="pro-username">{userName}</p>
+          <h1 className="pro-username">{userName}</h1>
           <div className="count-container">
-            <p className="pro-post-count">{postsCount} posts</p>
-            <p className="pro-follrs-count">{followersCount} followers</p>
-            <p className="pro-follng-count">{followingCount} following</p>
+            <p className="pro-post-count">
+              <span className="bold-count">{postsCount}</span> posts
+            </p>
+            <p className="pro-follrs-count">
+              <span className="bold-count">{followersCount}</span> followers
+            </p>
+            <p className="pro-follng-count">
+              <span className="bold-count">{followingCount}</span> following
+            </p>
           </div>
-          <p className="pro-name">{userName}</p>
+          <p className="pro-name">{userId}</p>
           <p className="pro-bio">{userBio}</p>
         </div>
       </div>
@@ -47,16 +54,27 @@ const MyProfile = props => {
       </ul>
       <hr className="pro-line" />
       <div className="pro-post-grid">
-        <BsGrid3X2 size={25} />
-        <p className="post-txt">Posts</p>
+        <BsGrid3X3 size={25} />
+        <h1 className="post-txt">Posts</h1>
       </div>
-      <ul className="pro-post-container">
-        {posts?.map(eachItem => (
-          <li key={eachItem.id}>
-            <img src={eachItem.image} alt="my post" className="pro-post-img" />
-          </li>
-        ))}
-      </ul>
+      {posts.length === 0 ? (
+        <>
+          <BiCamera />
+          <h1>No Posts</h1>
+        </>
+      ) : (
+        <ul className="pro-post-container">
+          {posts?.map(eachItem => (
+            <li key={eachItem.id}>
+              <img
+                src={eachItem.image}
+                alt="my post"
+                className="pro-post-img"
+              />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }

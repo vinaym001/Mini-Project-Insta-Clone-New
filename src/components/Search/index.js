@@ -7,13 +7,13 @@ import {FaRegComment} from 'react-icons/fa'
 import {BiShareAlt} from 'react-icons/bi'
 import {FcLike} from 'react-icons/fc'
 
-class Posts extends Component {
+class Search extends Component {
   state = {isLiked: false}
 
   onLiked = async () => {
     const {isLiked} = this.state
-    const {postDetailsItems} = this.props
-    const {postId} = postDetailsItems
+    const {searchDetailsItems} = this.props
+    const {postId} = searchDetailsItems
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = `https://apis.ccbp.in/insta-share/posts/${postId}/like`
     const reqObj = {like_status: !isLiked}
@@ -33,7 +33,7 @@ class Posts extends Component {
 
   render() {
     const {isLiked} = this.state
-    const {postDetailsItems} = this.props
+    const {searchDetailsItems} = this.props
 
     const {
       postId,
@@ -44,7 +44,7 @@ class Posts extends Component {
       profilePic,
       userId,
       userName,
-    } = postDetailsItems
+    } = searchDetailsItems
     return (
       <li className="post-li-container">
         <div className="post-upper-container">
@@ -119,4 +119,4 @@ class Posts extends Component {
   }
 }
 
-export default Posts
+export default Search

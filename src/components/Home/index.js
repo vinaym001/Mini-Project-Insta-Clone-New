@@ -7,6 +7,7 @@ import {FaSearch} from 'react-icons/fa'
 
 import Loader from 'react-loader-spinner'
 import Slicker from '../Slicker'
+import Search from '../Search'
 import Posts from '../Posts'
 
 const apiStatusConstants = {
@@ -16,6 +17,7 @@ const apiStatusConstants = {
   fail: 'FAILURE',
   noSearchResult: 'NO_SEARCH_RESULT_FOUND',
   noPost: 'NO_POSTS_FOUND',
+  searchSuccess: 'SEARCH_API_CALL',
 }
 
 class Home extends Component {
@@ -23,6 +25,7 @@ class Home extends Component {
     postsList: [],
     apiStatus: apiStatusConstants.initial,
     searchInput: '',
+    searchList: [],
   }
 
   componentDidMount() {
@@ -57,24 +60,39 @@ class Home extends Component {
     const response = await fetch(apiUrl, options)
     if (response.ok) {
       const data = await response.json()
-      const searchData = data.posts.map(eachItem => ({
-        comments: eachItem.comments,
-        createdAt: eachItem.created_at,
-        likesCount: eachItem.likes_count,
-        postDetails: eachItem.post_details,
-        postId: eachItem.post_id,
-        profilePic: eachItem.profile_pic,
-        userId: eachItem.user_id,
-        userName: eachItem.user_name,
-      }))
       if (data.total === 0) {
         this.setState({apiStatus: apiStatusConstants.noSearchResult})
+      } else {
+        const searchData = data.posts.map(eachItem => ({
+          comments: eachItem.comments,
+          createdAt: eachItem.created_at,
+          likesCount: eachItem.likes_count,
+          postDetails: eachItem.post_details,
+          postId: eachItem.post_id,
+          profilePic: eachItem.profile_pic,
+          userId: eachItem.user_id,
+          userName: eachItem.user_name,
+        }))
+
+        this.setState({
+          searchList: searchData,
+          apiStatus: apiStatusConstants.searchSuccess,
+        })
       }
-      this.setState({
-        postsList: searchData,
-        apiStatus: apiStatusConstants.success,
-      })
+    } else {
+      this.setState({apiStatus: apiStatusConstants.fail})
     }
+  }
+
+  renderSearchData = () => {
+    const {searchList} = this.state
+    return (
+      <ul>
+        {searchList.map(eachItem => (
+          <Search key={eachItem.postId} searchDetailsItems={eachItem} />
+        ))}
+      </ul>
+    )
   }
 
   renderHeader = () => (
@@ -101,7 +119,7 @@ class Home extends Component {
                 type="button"
                 className="search-btn"
                 onClick={this.onSearchClick}
-                data-testid="searchIcon"
+                testid="searchIcon"
               >
                 <FaSearch className="search-icon" />
               </button>
@@ -178,7 +196,13 @@ class Home extends Component {
   }
 
   renderLoaderView = () => (
-    <div className="loader-container" data-testid="loader">
+    <div className="loader-container" testid="loader">
+      <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
+    </div>
+  )
+
+  renderLoaderView = () => (
+    <div className="loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
     </div>
   )
@@ -197,8 +221,8 @@ class Home extends Component {
   renderFailView = () => (
     <>
       <img
-        src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676539801/alert-triangle_hkmcpf.png"
-        alt="page not found"
+        alt="failure view"
+        src="https://res.cloudinary.com/aneesmon/image/upload/v1648988122/Insta_Share/home-failure-image_twfusi.png"
         className="page not found"
       />
       <p className="home-fail-text">Something went wrong. Please try again</p>
@@ -227,6 +251,18 @@ class Home extends Component {
     )
   }
 
+  renderNoSearchFound = () => (
+    <>
+      <img
+        src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676703538/Group_7522_ukwcn0.png"
+        alt="search not found"
+        className="page not found"
+      />
+      <h1>Search Not Found</h1>
+      <p className="home-fail-text">Try different keyword or search again</p>
+    </>
+  )
+
   renderViewOnApiStatus = () => {
     const {apiStatus} = this.state
     switch (apiStatus) {
@@ -236,19 +272,22 @@ class Home extends Component {
         return this.renderPosts()
       case apiStatusConstants.fail:
         return this.renderFailView()
+      case apiStatusConstants.searchSuccess:
+        return this.renderSearchData()
       case apiStatusConstants.noSearchResult:
-        return this.renderNoSearchFoundView()
+        return this.renderNoSearchFound()
       default:
         return null
     }
   }
 
   render() {
-    const {storyDataList} = this.state
+    const {searchInput} = this.state
     return (
       <div className="home-bg-container">
         {this.renderHeader()}
         <Slicker />
+        {searchInput.length !== 0 && <h1>Search Results</h1>}
         {this.renderViewOnApiStatus()}
       </div>
     )

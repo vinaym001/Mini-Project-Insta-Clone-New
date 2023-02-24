@@ -9,25 +9,27 @@
   width: 280px;
   height: 280px;
   left: 260px;
-  top: 130px;
+  top: 120px;
   border-radius: 90px;
 }
 
 .profile-img {
-  width: 130px;
+  width: 180px;
 }
 .profile-info {
 }
 .count-container {
+  position: absolute;
+  left: 20.9%;
   display: flex;
   align-items: center;
 }
 
 .pro-username {
   position: absolute;
-  left: 30.83%;
+  left: 34.13%;
   right: 63.61%;
-  top: 4.86%;
+  top: 4.56%;
   bottom: 93.56%;
   font-family: 'Roboto';
   font-style: normal;
@@ -40,11 +42,11 @@
   position: absolute;
   width: 63px;
   height: 24px;
-  left: 444px;
+  left: 443px;
   top: 155px;
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #262626;
@@ -58,7 +60,7 @@
   top: 155px;
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #262626;
@@ -71,16 +73,16 @@
   top: 155px;
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #262626;
 }
 .pro-name {
   position: absolute;
-  left: 30.83%;
+  left: 34.13%;
   right: 66.32%;
-  top: 9.58%;
+  top: 9.18%;
   bottom: 87.24%;
   font-family: 'Roboto';
   font-style: normal;
@@ -93,8 +95,8 @@
   position: absolute;
   width: 675px;
   height: 48px;
-  left: 444px;
-  top: 227px;
+  left: 34.13%;
+  top: 226px;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
@@ -105,9 +107,9 @@
 
 .pro-story-container {
   position: absolute;
-  left: 14.83%;
+  left: 15.83%;
   right: 66.32%;
-  top: 14.58%;
+  top: 15.58%;
   bottom: 85.24%;
   display: flex;
   list-style-type: none;
@@ -115,15 +117,15 @@
 .pro-story-img {
   background: #f3eadb;
   border-radius: 100%;
-  width: 70px;
-  margin-right: 20px;
+  width: 86px;
+  margin-right: 30px;
 }
 
 .pro-post-container {
   position: absolute;
-  left: 15.83%;
+  left: 14.83%;
   right: 60.32%;
-  top: 22.58%;
+  top: 24.58%;
   bottom: 79.24%;
   display: flex;
   list-style-type: none;
@@ -131,7 +133,8 @@
 }
 .pro-post-img {
   background: #f3eadb;
-  width: 300px;
+  width: 330px;
+  height: 330px;
   margin-right: 10px;
 }
 
@@ -139,27 +142,30 @@
   display: flex;
   align-items: center;
   position: absolute;
-  left: 18.83%;
+  left: 17.83%;
   right: 65.32%;
-  top: 0.58%;
+  top: 4.58%;
   bottom: 58.24%;
 }
 
 .pro-line {
   position: absolute;
-  width: 925px;
+  width: 1015px;
   height: 0px;
   left: 250px;
-  top: 415px;
+  top: 440px;
   border: 0.5px solid #c6c6c8;
 }
 
 .pro-post-txt {
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 22px;
   line-height: 32px;
   color: #262626;
   margin-left: 10px;
+}
+.bold-count {
+  font-weight: 500;
 }

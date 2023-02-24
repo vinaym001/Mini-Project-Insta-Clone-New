@@ -4,6 +4,7 @@ import './index.css'
 import {Link} from 'react-router-dom'
 
 import {FaSearch} from 'react-icons/fa'
+import {BiCamera} from 'react-icons/bi'
 import Loader from 'react-loader-spinner'
 
 import MyProfile from '../MyProfile'
@@ -140,33 +141,35 @@ class Profile extends Component {
 
     if (response.ok) {
       const data = await response.json()
-      const proData = data.profile
-      const profileData = {
-        id: proData.id,
-        userId: proData.user_id,
-        userName: proData.user_name,
-        profilePic: proData.profile_pic,
-        followersCount: proData.followers_count,
-        followingCount: proData.following_count,
-        userBio: proData.user_bio,
-        posts: proData.posts,
-        postsCount: proData.posts_count,
-        stories: proData.stories,
-      }
       if (data.length === 0) {
         this.setState({apiStatus: apiStatusConstants.noPost})
+      } else {
+        const proData = data.profile
+        const profileData = {
+          id: proData.id,
+          userId: proData.user_id,
+          userName: proData.user_name,
+          profilePic: proData.profile_pic,
+          followersCount: proData.followers_count,
+          followingCount: proData.following_count,
+          userBio: proData.user_bio,
+          posts: proData.posts,
+          postsCount: proData.posts_count,
+          stories: proData.stories,
+        }
+
+        this.setState({
+          myProfileDetails: profileData,
+          apiStatus: apiStatusConstants.success,
+        })
       }
-      this.setState({
-        myProfileDetails: profileData,
-        apiStatus: apiStatusConstants.success,
-      })
     } else {
       this.setState({apiStatus: apiStatusConstants.fail})
     }
   }
 
   renderLoaderView = () => (
-    <div className="loader-container" data-testid="loader">
+    <div className="loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
     </div>
   )
@@ -178,36 +181,24 @@ class Profile extends Component {
 
   renderNopostView = () => (
     <>
-      <img
-        src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676702684/cam_kkbxyi.png"
-        alt="no posts"
-        className="page not found"
-      />
+      <BiCamera className="page not found" />
       <p className="home-fail-text">No Posts Yet</p>
     </>
   )
 
-  renderFailView = () => {
-    const onRetry = () => {
-      this.setState(
-        {apiStatus: apiStatusConstants.progress},
-        this.renderUserProfile,
-      )
-    }
-    return (
-      <>
-        <img
-          src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676703538/Group_7522_ukwcn0.png"
-          alt="page not found"
-          className="page not found"
-        />
-        <p className="home-fail-text">Something went wrong. Please try again</p>
-        <button type="button" className="retry-btn" onClick={onRetry}>
-          Try again
-        </button>
-      </>
-    )
-  }
+  renderFailView = () => (
+    <>
+      <img
+        src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676703538/Group_7522_ukwcn0.png"
+        alt="page not found"
+        className="page not found"
+      />
+      <p className="home-fail-text">Something went wrong. Please try again</p>
+      <button type="button" className="retry-btn" onClick={this.getProfileData}>
+        Try again
+      </button>
+    </>
+  )
 
   renderViewOnApiStatus = () => {
     const {apiStatus} = this.state

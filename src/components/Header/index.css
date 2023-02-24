@@ -1,7 +1,7 @@
 .nav-container {
   position: absolute;
   width: 1440px;
-  height: 64px;
+  height: 70px;
   left: 0px;
   top: 0px;
   background: #ffffff;
@@ -9,14 +9,16 @@
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #fafafa;
+  padding-bottom: 20px;
 }
 
 .header-website-logo {
   position: absolute;
   left: 13.89%;
   right: 82.01%;
-  top: 39.95%;
-  bottom: 28%;
+  top: 22.95%;
+  bottom: 29%;
+  padding-bottom: 20px;
 }
 
 .search-input-container {
@@ -35,15 +37,15 @@
 
 .search-btn {
   background-color: transparent;
-  border:none;
-  cursor:pointer;
+  border: none;
+  cursor: pointer;
 }
 
 .header-search-input {
   width: 80%;
   height: 100%;
   margin-right: 10px;
-  border: none;
+  border: 1px solid #dbdbdb;
 }
 .home-link {
   position: absolute;
@@ -103,6 +105,9 @@
   position: absolute;
   left: 18.82%;
   right: 74.1%;
-  top: 31.25%;
+  top: 25.25%;
   bottom: 31.25%;
+  margin-left: 20px;
+  width: 150px;
+  padding-bottom: 20px;
 }

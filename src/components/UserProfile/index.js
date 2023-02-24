@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import Loader from 'react-loader-spinner'
+
 import Cookies from 'js-cookie'
 import Header from '../Header'
 import UserProfileDetails from '../UserProfileDetails'
@@ -10,6 +11,7 @@ const apiStatusConstants = {
   progress: 'IN_PROGRESS',
   success: 'SUCCESS',
   fail: 'FAILURE',
+  noPost: 'NO_POSTS_FOUND',
 }
 
 class UserProfile extends Component {
@@ -48,6 +50,9 @@ class UserProfile extends Component {
         postsCount: userDetails.posts_count,
         stories: userDetails.stories,
       }
+      if (data.length === 0) {
+        this.setState({apiStatus: apiStatusConstants.noPost})
+      }
       this.setState({
         userProfileData: UserData,
         apiStatus: apiStatusConstants.success,
@@ -56,6 +61,17 @@ class UserProfile extends Component {
       this.setState({apiStatus: apiStatusConstants.fail})
     }
   }
+
+  renderNopostView = () => (
+    <>
+      <img
+        src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676702684/cam_kkbxyi.png"
+        alt="no posts"
+        className="page not found"
+      />
+      <p className="home-fail-text">No Posts Yet</p>
+    </>
+  )
 
   renderUserProfileData = () => {
     const {userProfileData} = this.state
@@ -67,7 +83,7 @@ class UserProfile extends Component {
   }
 
   renderLoaderView = () => (
-    <div className="loader-container" data-testid="loader">
+    <div className="loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
     </div>
   )
@@ -75,8 +91,8 @@ class UserProfile extends Component {
   renderFailView = () => (
     <>
       <img
-        src="https://res.cloudinary.com/dzf4nrbvt/image/upload/v1676539801/alert-triangle_hkmcpf.png"
-        alt="page not found"
+        alt="failure view"
+        src="https://res.cloudinary.com/aneesmon/image/upload/v1648988122/Insta_Share/home-failure-image_twfusi.png"
         className="page not found"
       />
       <p className="home-fail-text">Something went wrong. Please try again</p>
@@ -93,6 +109,8 @@ class UserProfile extends Component {
         return this.renderLoaderView()
       case apiStatusConstants.success:
         return this.renderUserProfileData()
+      case apiStatusConstants.noPost:
+        return this.renderNopostView()
       case apiStatusConstants.fail:
         return this.renderFailView()
       default:

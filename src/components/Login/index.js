@@ -51,6 +51,7 @@ class Login extends Component {
           alt="website login"
           className="login-img"
         />
+        <h1>Insta Share</h1>
         <div className="login-container">
           <div>
             <img
